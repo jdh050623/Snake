@@ -16,7 +16,7 @@ public class SnakeController : MonoBehaviour
 	[SerializeField]
 	private	Transform		segmentPrefab;						// Segment 프리팹
 	[SerializeField]
-	private	int				spawnSegmentCountAtStart = 4;		// 게임 시작 시 Snake의 길이 (머리 포함)
+	public int				spawnSegmentCountAtStart = 6;		// 게임 시작 시 Snake의 길이 (머리 포함)
 	private	List<Transform>	segments = new List<Transform>();	// Snake와 Segment를 관리하는 리스트
 
 	[Header("MapCollider")]
