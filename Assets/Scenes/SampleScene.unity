@@ -435,7 +435,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0.7075472, b: 0.44283321, a: 1}
   m_FlipX: 0
@@ -474,7 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab299cfd0f6f59c4fb62db7627054ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: 0.1
+  moveTime: 0.15
   segmentPrefab: {fileID: 8554179601463001088, guid: db5128ea1d7ecbc41b77883f75eff9da, type: 3}
   spawnSegmentCountAtStart: 6
   mapCollider2D: {fileID: 1603726909}
@@ -532,6 +532,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 819622865667674091, guid: bb3235372d0919048b0665a603a3805a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6453137184517139801, guid: bb3235372d0919048b0665a603a3805a, type: 3}
       propertyPath: mapCollider2D
       value: 

@@ -56,11 +56,13 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\BombingManager.cs" />
     <Compile Include="Assets\CoinSpawn.cs" />
     <Compile Include="Assets\Script\Item.cs" />
     <Compile Include="Assets\Script\SnakeController.cs" />
     <Compile Include="Assets\Script\Bombing.cs" />
-    <Compile Include="Assets\Script\BombingManager.cs" />
+    <Compile Include="Assets\Script\BoomDel.cs" />
+    <Compile Include="Assets\Script\SurvivalTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

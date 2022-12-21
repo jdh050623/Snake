@@ -7,7 +7,7 @@ public class SnakeController : MonoBehaviour
 {
 	[Header("Snake Movement")]
 	[SerializeField]
-	private	float			moveTime = 0.1f;					// 한 칸 이동 시간
+	private	float			moveTime = 0.15f;                    // 한 칸 이동 시간
 	private	Vector2			moveDirection = Vector2.right;		// 이동 방향
 	// 실제 Snake 이동방향은 안바뀌었지만 입력 방향에 의해 같은 축으로 이동이 가능한 것을 방지
 	private	Vector2			lastInputDirection = Vector2.right;
