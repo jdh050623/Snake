@@ -29,8 +29,6 @@ public class Bombing : MonoBehaviour
 
 		int x = UnityEngine.Random.Range(-7, 7);//(int)bounds.min.x, (int)bounds.max.x + 1);
 		int y = UnityEngine.Random.Range(-7, 7);//(int)bounds.min.y, (int)bounds.max.y + 1);
-		Debug.Log(x);
-		Debug.Log(y);
 		transform.position = new Vector2(x, y);
 	}
 

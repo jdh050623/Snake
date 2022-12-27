@@ -12,7 +12,9 @@ public class Item : MonoBehaviour
 
 	private void SetupRandomPosition()
 	{
+
 		Bounds bounds = mapCollider2D.bounds;
+
 
 		int x = Random.Range((int)bounds.min.x, (int)bounds.max.x+1);
 		int y = Random.Range((int)bounds.min.y, (int)bounds.max.y+1);

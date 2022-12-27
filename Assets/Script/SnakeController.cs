@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SnakeController : MonoBehaviour
 {
@@ -11,6 +10,7 @@ public class SnakeController : MonoBehaviour
 	private	Vector2			moveDirection = Vector2.right;		// 이동 방향
 	// 실제 Snake 이동방향은 안바뀌었지만 입력 방향에 의해 같은 축으로 이동이 가능한 것을 방지
 	private	Vector2			lastInputDirection = Vector2.right;
+	public static bool move = true; //움직이게 할지 말지
 
 	[Header("Snake Segments")]
 	[SerializeField]
@@ -21,13 +21,16 @@ public class SnakeController : MonoBehaviour
 
 	[Header("MapCollider")]
 	[SerializeField]
-	private	BoxCollider2D	mapCollider2D;						// 맵을 벗어나는지 검사하기 위한 맵의 충돌 범위 정보
+	private	BoxCollider2D	mapCollider2D;                      // 맵을 벗어나는지 검사하기 위한 맵의 충돌 범위 정보
+
+	public GameObject gameOverSc; //게임 오버 화면
+	public static int Score;
 
 	private IEnumerator Start()
 	{
 		Setup();
 
-		while ( true )
+		while (move)
 		{
 			MoveSegments();
 
@@ -55,12 +58,15 @@ public class SnakeController : MonoBehaviour
 	{
 		if ( collision.CompareTag("Item") )
 		{
+			Score++;
+			Debug.Log(Score);
 			AddSegment();
 		}
-		else if ( collision.CompareTag("Segment") )
+
+		if ( collision.CompareTag("Segment") )
 		{
-			Debug.Log($"획득 점수 : {segments.Count}");
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			GameOver();
+			
 		}
 	}
 
@@ -114,9 +120,15 @@ public class SnakeController : MonoBehaviour
 		if ( transform.position.x < bounds.min.x || transform.position.x > bounds.max.x ||
 			 transform.position.y < bounds.min.y || transform.position.y > bounds.max.y )
 		{
-			Debug.Log($"획득 점수 : {segments.Count}");
-			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			GameOver();
+			//SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
+	}
+
+	private void GameOver()
+    {
+		move = false;
+		gameOverSc.SetActive(true);
 	}
 }
 
