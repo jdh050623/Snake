@@ -14,22 +14,30 @@ public class SnakeController : MonoBehaviour
 
 	[Header("Snake Segments")]
 	[SerializeField]
-	private	Transform		segmentPrefab;						// Segment 프리팹
+	public	Transform		segmentPrefab;						// Segment 프리팹 //
 	[SerializeField]
-	public int				spawnSegmentCountAtStart = 6;		// 게임 시작 시 Snake의 길이 (머리 포함)
-	private	List<Transform>	segments = new List<Transform>();	// Snake와 Segment를 관리하는 리스트
+	public int				spawnSegmentCountAtStart = 2;       // 게임 시작 시 Snake의 길이 (머리 포함)
+	public List<Transform>	segments = new List<Transform>();   // Snake와 Segment를 관리하는 리스트 //
+	Transform segment;
+	public static bool p_SegmentDel;
 
 	[Header("MapCollider")]
 	[SerializeField]
 	private	BoxCollider2D	mapCollider2D;                      // 맵을 벗어나는지 검사하기 위한 맵의 충돌 범위 정보
 
+	public GameObject Fog;
 	public GameObject gameOverSc; //게임 오버 화면
 	public static int Score;
+	public static int MaxScore;
+	public static int changeText; //UI_Text.cs 에서 얻은 아이템에 따라 텍스트가 변경됨
+	int maxBoomLength;
 
 	private IEnumerator Start()
 	{
 		Setup();
-
+		maxBoomLength = spawnSegmentCountAtStart-1;
+		changeText = 0;
+		Score = 0;
 		while (move)
 		{
 			MoveSegments();
@@ -40,6 +48,33 @@ public class SnakeController : MonoBehaviour
 
 	private void Update()
 	{
+		if(MaxScore < Score)
+        {
+			MaxScore = Score;
+        }
+
+		if (Input.GetKeyUp(KeyCode.D))
+		{
+			Debug.Log("위험");
+			segmentPrefab.tag = "Segment";
+		}
+
+		if (Input.GetKeyUp(KeyCode.A))
+		{
+			Debug.Log("ㅇㅇ");
+			segments.RemoveRange(1, maxBoomLength);
+			p_SegmentDel = true;
+			StartCoroutine(BoolFalse());
+			maxBoomLength = 0;
+		}
+
+		if (Input.GetKeyUp(KeyCode.S))
+		{
+			Debug.Log("안개안개 은신술");
+			Fog.SetActive(true);
+			StartCoroutine(FogOff());
+		}
+		
 		// 현재 x축으로 이동중이면 y축 방향으로만 방향 전환 가능
 		if ( moveDirection.x != 0 )
 		{
@@ -59,8 +94,41 @@ public class SnakeController : MonoBehaviour
 		if ( collision.CompareTag("Item") )
 		{
 			Score++;
-			Debug.Log(Score);
-			AddSegment();
+			int ran = Random.Range(0, 20);
+
+			if (ran <= 9)
+			{
+				changeText = 1;
+				Debug.Log("꼬리증가");
+				AddSegment();
+				maxBoomLength++;
+			}
+
+            if (ran >= 10 && ran <= 16)
+            {
+				changeText = 2;
+				Debug.Log("추가점수");
+                Score++;
+            }
+
+            if (ran >= 17 && ran <= 18)
+            {
+				changeText = 3;
+				Debug.Log("안개안개 은신술");
+				Fog.SetActive(true);
+				StartCoroutine(FogOff());
+
+			}
+
+			if (ran == 19)
+			{
+				changeText = 4;
+				Debug.Log("꼬리 초기화!!!!!");
+				segments.RemoveRange(1, maxBoomLength);
+				p_SegmentDel = true;
+				StartCoroutine(BoolFalse());
+				maxBoomLength = 0;
+			}
 		}
 
 		if ( collision.CompareTag("Segment") )
@@ -98,8 +166,8 @@ public class SnakeController : MonoBehaviour
 
 	private void AddSegment()
 	{
-		Transform segment = Instantiate(segmentPrefab);
-		segment.position = segments[segments.Count-1].position;
+		segment = Instantiate(segmentPrefab);
+		segment.position = segments[segments.Count - 1].position;
 		segments.Add(segment);
 	}
 
@@ -130,5 +198,18 @@ public class SnakeController : MonoBehaviour
 		move = false;
 		gameOverSc.SetActive(true);
 	}
+
+	IEnumerator BoolFalse()
+	{
+		yield return new WaitForSeconds(0.01f);
+		p_SegmentDel = false;
+	}
+
+	IEnumerator FogOff()
+    {
+		yield return new WaitForSeconds(3f);
+		Fog.SetActive(false);
+	}
+
 }
 
