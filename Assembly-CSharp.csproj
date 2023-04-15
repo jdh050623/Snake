@@ -60,12 +60,12 @@
     <Compile Include="Assets\CoinSpawn.cs" />
     <Compile Include="Assets\Script\Item.cs" />
     <Compile Include="Assets\Script\PlayerSegment.cs" />
+    <Compile Include="Assets\Script\UI_Text.cs" />
     <Compile Include="Assets\Script\SnakeController.cs" />
     <Compile Include="Assets\Script\Bombing.cs" />
     <Compile Include="Assets\Script\UIManager.cs" />
     <Compile Include="Assets\Script\SurvivalTime.cs" />
     <Compile Include="Assets\Script\BoomDel.cs" />
-    <Compile Include="Assets\Script\UI_Text.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
